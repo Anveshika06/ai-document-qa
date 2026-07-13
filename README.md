@@ -11,6 +11,14 @@ A full-stack RAG application that answers questions about a document using only 
   - the source snippets it used (so the answer is verifiable)
   - a confidence level, with an escalation prompt when confidence is low
 
+## Screenshots
+
+Answer with grounded sources and confidence for a sample NDA Contract:
+
+![Answer](Screenshots\Answer_sources .png)
+Source citations: showing which passages the answer used
+
+
 ## How it works (RAG pipeline)
 
 1. **Chunk** the document into passages

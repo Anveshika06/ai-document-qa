@@ -15,8 +15,8 @@ from pydantic import BaseModel
 
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
-EMBED_MODEL = "models/text-embedding-004"
-GEN_MODEL = "gemini-2.5-flash-lite"
+EMBED_MODEL = "models/gemini-embedding-2"
+GEN_MODEL = "models/gemini-3.1-flash-lite"
 TOP_K = 3
 
 app = FastAPI(title="AI Document Q&A")
