@@ -41,14 +41,20 @@ Source citations: showing which passages the answer used
 
 ## Running locally
 
-Backend:
+**Backend** (from the project root):
+
+```bash
 cd backend
 pip install -r ../requirements.txt
 uvicorn app:app --reload --port 8001
+```
 
-Frontend:
+**Frontend:**
+
+```bash
 cd doc-qa-ui
 npm install
 npm run dev
+```
 
-Requires a `GEMINI_API_KEY` environment variable.
+Requires a `GEMINI_API_KEY` environment variable set where the backend runs.
