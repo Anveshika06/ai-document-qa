@@ -1,6 +1,6 @@
 # AI Document Assistant
 
-A full-stack RAG application that answers questions about a document using only that document — with source citations, a confidence level, and a human-review escalation path for low-confidence answers.
+A full-stack RAG application that answers questions about a document using only that document with source citations, a confidence level, and a human-review escalation path for low-confidence answers.
 
 ## What it does
 
