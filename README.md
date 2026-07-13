@@ -15,7 +15,7 @@ A full-stack RAG application that answers questions about a document using only 
 
 Answer with grounded sources and confidence for a sample NDA Contract:
 
-![Answer](Screenshots\Answer_sources .png)
+![Answer](Screenshots\Answer_sources%20.png)
 Source citations: showing which passages the answer used
 
 
