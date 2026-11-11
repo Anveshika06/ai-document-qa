@@ -33,10 +33,10 @@ Source citations: showing which passages the answer used
 - Backend: FastAPI, NumPy for similarity search
 - Model: Google Gemini (generation + embeddings)
 
-## Why it's designed this way
+## Why the design?
 
 - **Citations for trust.** Every answer shows the exact source passages, because in a real setting people can't act on an answer they can't verify.
-- **Grounded, not open-ended.** The model answers only from the document and says so when the answer isn't there — reducing hallucination.
+- **Grounded, not open-ended.** The model answers only from the document and says so when the answer isn't there, reducing hallucination.
 - **Confidence routes to humans.** Low-confidence answers surface a review prompt instead of being presented as certain.
 
 ## Running locally
