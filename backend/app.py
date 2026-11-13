@@ -1,133 +1,105 @@
-"""AI Document Q&A — FastAPI backend with a RAG pipeline.
 
-Flow: chunk the document -> embed chunks -> embed the question ->
-retrieve top-k chunks by cosine similarity -> ask the LLM to answer
-using ONLY those chunks, with citations and a confidence level.
-"""
 import os
-import json
-
-import numpy as np
-import google.generativeai as genai
-from fastapi import FastAPI
+from pathlib import Path
+from dotenv import load_dotenv
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from rag import RAGService
 
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-
-EMBED_MODEL = "models/gemini-embedding-2"
-GEN_MODEL = "models/gemini-3.1-flash-lite"
-TOP_K = 3
-
-app = FastAPI(title="AI Document Q&A")
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
+BASE = Path(__file__).resolve().parent.parent
+load_dotenv(BASE / ".env")
+DATA_DIR = Path(
+    os.getenv("RAG_DATA_DIR", str(BASE / ".local_data"))
 )
+if os.getenv('GEMINI_API_KEY') and not os.getenv('GOOGLE_API_KEY'):
+    os.environ['GOOGLE_API_KEY'] = os.environ['GEMINI_API_KEY']
+app = FastAPI(title='Contract & Policy Intelligence API', version='2.0')
+app.add_middleware(CORSMiddleware, allow_origins=os.getenv('CORS_ORIGINS', 'http://localhost:5173,http://127.0.0.1:5173').split(','),
+                   allow_credentials=False, allow_methods=['GET', 'POST', 'DELETE'], allow_headers=['Content-Type'])
+service = RAGService(DATA_DIR)
+
+
+class TextDocument(BaseModel):
+    title: str = Field(min_length=1, max_length=160)
+    kind: str = 'policy'
+    text: str = Field(min_length=1, max_length=650_000)
 
 
 class AskRequest(BaseModel):
-    document: str
-    question: str
+    question: str = Field(min_length=1, max_length=1000)
+    document_ids: list[str] | None = None
 
 
-def chunk_document(text: str, target_words: int = 80) -> list[str]:
-    """Split a document into chunks of roughly target_words, on paragraph
-    boundaries where possible."""
-    paragraphs = [p.strip() for p in text.split("\n") if p.strip()]
-    chunks, current, count = [], [], 0
-    for para in paragraphs:
-        words = para.split()
-        if count + len(words) > target_words and current:
-            chunks.append(" ".join(current))
-            current, count = [], 0
-        current.append(para)
-        count += len(words)
-    if current:
-        chunks.append(" ".join(current))
-    return chunks or [text]
+def fail(exc):
+    if isinstance(exc, ValueError):
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    raise exc
 
 
-def embed(texts: list[str]) -> np.ndarray:
-    """Embed a list of texts into vectors."""
-    result = genai.embed_content(model=EMBED_MODEL, content=texts)
-    return np.array(result["embedding"])
+@app.get('/health')
+def health():
+    return {'status': 'ok', 'indexed_active_documents': len(service.catalog.list_documents()),
+            'model_configured': bool(os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY'))}
 
 
-def cosine_sim(query_vec: np.ndarray, matrix: np.ndarray) -> np.ndarray:
-    """Cosine similarity between one vector and each row of a matrix."""
-    q = query_vec / (np.linalg.norm(query_vec) + 1e-9)
-    m = matrix / (np.linalg.norm(matrix, axis=1, keepdims=True) + 1e-9)
-    return m @ q
+@app.get('/documents')
+def documents(all_versions: bool = False):
+    return {'documents': service.catalog.list_documents(active_only=not all_versions)}
 
 
-def retrieve(question: str, chunks: list[str]) -> list[dict]:
-    """Return the top-k most relevant chunks with their similarity scores."""
-    chunk_vecs = embed(chunks)
-    q_vec = embed([question])[0]
-    sims = cosine_sim(q_vec, chunk_vecs)
-    top_idx = np.argsort(sims)[::-1][:TOP_K]
-    return [{"text": chunks[i], "score": float(sims[i])} for i in top_idx]
-
-
-def answer(question: str, top_chunks: list[dict]) -> dict:
-    """Ask the LLM to answer using only the retrieved chunks."""
-    context = "\n\n".join(
-        f"[Source {i+1}]: {c['text']}" for i, c in enumerate(top_chunks)
-    )
-    prompt = f"""You are a careful document assistant. Answer the question using ONLY the sources below. \
-If the answer is not in the sources, say "The document does not contain this information." \
-Respond ONLY with valid JSON, no markdown.
-
-Sources:
-{context}
-
-Question: {question}
-
-Return JSON with this exact shape:
-{{
-  "answer": "your answer, grounded only in the sources",
-  "cited_sources": [list of source numbers you used, e.g. [1, 2]],
-  "confidence": "High" | "Medium" | "Low"
-}}"""
-
-    model = genai.GenerativeModel(GEN_MODEL)
-    resp = model.generate_content(
-        prompt,
-        generation_config={"temperature": 0.2, "response_mime_type": "application/json"},
-    )
+@app.post('/documents/text')
+def add_text(request: TextDocument):
     try:
-        parsed = json.loads(resp.text)
-    except (json.JSONDecodeError, ValueError):
-        return {
-            "answer": "Could not parse a reliable answer. Please review manually.",
-            "cited_sources": [],
-            "confidence": "Low",
-        }
-    return parsed
+        return service.ingest(request.title, request.kind, [request.text])
+    except Exception as exc:
+        fail(exc)
 
 
-@app.post("/ask")
-def ask(req: AskRequest):
-    chunks = chunk_document(req.document)
-    top_chunks = retrieve(req.question, chunks)
-    result = answer(req.question, top_chunks)
+@app.post('/documents/upload')
+async def upload_document(file: UploadFile = File(...), kind: str = Form('policy')):
+    name = Path(file.filename or 'uploaded.txt').name
+    ext = Path(name).suffix.lower()
+    if ext not in ('.pdf', '.txt'):
+        raise HTTPException(400, 'Only .pdf and .txt uploads are supported')
+    raw = await file.read(8_000_001)
+    if len(raw) > 8_000_000:
+        raise HTTPException(413, 'File must be 8 MB or less')
+    try:
+        if ext == '.pdf':
+            import io
+            from pypdf import PdfReader
+            reader = PdfReader(io.BytesIO(raw))
+            if len(reader.pages) > 60:
+                raise HTTPException(413, 'Maximum 60 PDF pages')
+            pages = [(page.extract_text() or '') for page in reader.pages]
+        else:
+            pages = [raw.decode('utf-8-sig')]
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(400, 'Could not extract text; scanned PDFs need OCR and are not supported') from exc
+    try:
+        return service.ingest(name, kind, pages)
+    except Exception as exc:
+        fail(exc)
 
-    # Attach the actual source text for the cited sources so the UI can show them.
-    cited = result.get("cited_sources", [])
-    sources = []
-    for i, c in enumerate(top_chunks, start=1):
-        sources.append({
-            "number": i,
-            "text": c["text"],
-            "score": round(c["score"], 3),
-            "cited": i in cited,
-        })
 
-    return {
-        "answer": result.get("answer", ""),
-        "confidence": result.get("confidence", "Low"),
-        "sources": sources,
-    }
+@app.delete('/documents/{document_id}')
+def remove_document(document_id: str):
+    try:
+        if not service.remove(document_id):
+            raise HTTPException(404, 'Document not found')
+        return {'deleted': document_id}
+    except HTTPException:
+        raise
+    except Exception as exc:
+        fail(exc)
+
+
+@app.post('/ask')
+def ask(request: AskRequest):
+    try:
+        return service.ask(request.question, request.document_ids)
+    except Exception as exc:
+        fail(exc)

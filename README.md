@@ -1,60 +1,64 @@
-# AI Document Assistant
+# Contract & Policy Intelligence Assistant
 
-A full-stack RAG application that answers questions about a document using only that document with source citations, a confidence level, and a human-review escalation path for low-confidence answers.
+A local-first assistant for searching contracts and company policies. Add documents once, ask questions in plain language, and review answers alongside cited passages.
 
-## What it does
+![Document assistant showing an answer with cited sources](Screenshots/Rag-doc.png)
 
-- Paste in any document (contract, policy, report)
-- Ask a question in plain language
-- The app retrieves the most relevant passages, answers using only those passages, and shows:
-  - the answer, grounded in the document
-  - the source snippets it used (so the answer is verifiable)
-  - a confidence level, with an escalation prompt when confidence is low
+Built with React and Vite, FastAPI, LangChain, Chroma, SQLite, and Google Gemini.
 
-## Screenshots
+## Features
 
-Answer with grounded sources and confidence for a sample NDA Contract:
+- Upload PDF or TXT files, or paste document text. Scanned PDFs are not supported.
+- Keep document metadata and versions in SQLite, with persistent vector search in Chroma.
+- Search the full library or select specific current documents.
+- Review answers with source excerpts, document names, and page numbers. Unsupported or conflicting evidence is flagged for review.
+- Replacing a document with new content creates a new version; older versions are excluded from current searches.
 
-![Answer with sources](Screenshots/Answer_sources%20.png)
+## Run locally (Windows PowerShell)
 
-Source citations: showing which passages the answer used
+Requires Python 3.11+ and Node.js. From the project root:
 
-
-## How it works (RAG pipeline)
-
-1. **Chunk** the document into passages
-2. **Embed** the passages and the question (Gemini text-embedding-004)
-3. **Retrieve** the top passages by cosine similarity
-4. **Answer** using only the retrieved passages, with citations and a confidence estimate
-
-## Stack
-
-- Frontend: React (Vite)
-- Backend: FastAPI, NumPy for similarity search
-- Model: Google Gemini (generation + embeddings)
-
-## Why the design?
-
-- **Citations for trust.** Every answer shows the exact source passages, because in a real setting people can't act on an answer they can't verify.
-- **Grounded, not open-ended.** The model answers only from the document and says so when the answer isn't there, reducing hallucination.
-- **Confidence routes to humans.** Low-confidence answers surface a review prompt instead of being presented as certain.
-
-## Running locally
-
-**Backend** (from the project root):
-
-```bash
-cd backend
-pip install -r ../requirements.txt
-uvicorn app:app --reload --port 8001
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+$env:GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
+python -m uvicorn app:app --app-dir backend --reload --host 127.0.0.1 --port 8001
 ```
 
-**Frontend:**
+The backend also reads `GEMINI_API_KEY` from a project-root `.env` file. In a second terminal:
 
-```bash
+```powershell
 cd doc-qa-ui
-npm install
+npm ci
 npm run dev
 ```
 
-Requires a `GEMINI_API_KEY` environment variable set where the backend runs.
+Open the URL printed by Vite (usually `http://localhost:5173`). The API is at `http://127.0.0.1:8001`; interactive API documentation is at `http://127.0.0.1:8001/docs`.
+
+Local data is stored in `.local_data` by default; set `RAG_DATA_DIR` to use another location. `GEMINI_CHAT_MODEL` and `GEMINI_EMBED_MODEL` can override the default Gemini models.
+
+## API
+
+- `GET /health`
+- `GET /documents` (current versions) or `GET /documents?all_versions=true`
+- `POST /documents/upload` (PDF/TXT) or `POST /documents/text`
+- `POST /ask` with a question and optional document IDs
+- `DELETE /documents/{id}`
+
+## Tests
+
+Run the offline backend tests:
+
+```powershell
+cd backend
+python -m unittest discover -s test -v
+```
+
+The tests use fake model and vector components; they do not cover live Gemini responses or real Chroma indexing.
+
+## Limitations
+
+This is a single-user local app, not a production or multi-user service. It has no authentication, and local data is not encrypted. Document text is sent to Google Gemini for embeddings and answers. Do not upload sensitive files unless you are authorized to share them. AI answers can be wrong and are not legal advice.
+
+See [Docs/architecture.md](Docs/architecture.md) for the architecture and evaluation notes.
