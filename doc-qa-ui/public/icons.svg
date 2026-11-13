@@ -1,24 +1,164 @@
-<svg xmlns="http://www.w3.org/2000/svg">
-  <symbol id="bluesky-icon" viewBox="0 0 16 17">
-    <g clip-path="url(#bluesky-clip)"><path fill="#08060d" d="M7.75 7.735c-.693-1.348-2.58-3.86-4.334-5.097-1.68-1.187-2.32-.981-2.74-.79C.188 2.065.1 2.812.1 3.251s.241 3.602.398 4.13c.52 1.744 2.367 2.333 4.07 2.145-2.495.37-4.71 1.278-1.805 4.512 3.196 3.309 4.38-.71 4.987-2.746.608 2.036 1.307 5.91 4.93 2.746 2.72-2.746.747-4.143-1.747-4.512 1.702.189 3.55-.4 4.07-2.145.156-.528.397-3.691.397-4.13s-.088-1.186-.575-1.406c-.42-.19-1.06-.395-2.741.79-1.755 1.24-3.64 3.752-4.334 5.099"/></g>
-    <defs><clipPath id="bluesky-clip"><path fill="#fff" d="M.1.85h15.3v15.3H.1z"/></clipPath></defs>
-  </symbol>
-  <symbol id="discord-icon" viewBox="0 0 20 19">
-    <path fill="#08060d" d="M16.224 3.768a14.5 14.5 0 0 0-3.67-1.153c-.158.286-.343.67-.47.976a13.5 13.5 0 0 0-4.067 0c-.128-.306-.317-.69-.476-.976A14.4 14.4 0 0 0 3.868 3.77C1.546 7.28.916 10.703 1.231 14.077a14.7 14.7 0 0 0 4.5 2.306q.545-.748.965-1.587a9.5 9.5 0 0 1-1.518-.74q.191-.14.372-.293c2.927 1.369 6.107 1.369 8.999 0q.183.152.372.294-.723.437-1.52.74.418.838.963 1.588a14.6 14.6 0 0 0 4.504-2.308c.37-3.911-.63-7.302-2.644-10.309m-9.13 8.234c-.878 0-1.599-.82-1.599-1.82 0-.998.705-1.82 1.6-1.82.894 0 1.614.82 1.599 1.82.001 1-.705 1.82-1.6 1.82m5.91 0c-.878 0-1.599-.82-1.599-1.82 0-.998.705-1.82 1.6-1.82.893 0 1.614.82 1.599 1.82 0 1-.706 1.82-1.6 1.82"/>
-  </symbol>
-  <symbol id="documentation-icon" viewBox="0 0 21 20">
-    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="m15.5 13.333 1.533 1.322c.645.555.967.833.967 1.178s-.322.623-.967 1.179L15.5 18.333m-3.333-5-1.534 1.322c-.644.555-.966.833-.966 1.178s.322.623.966 1.179l1.534 1.321"/>
-    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M17.167 10.836v-4.32c0-1.41 0-2.117-.224-2.68-.359-.906-1.118-1.621-2.08-1.96-.599-.21-1.349-.21-2.848-.21-2.623 0-3.935 0-4.983.369-1.684.591-3.013 1.842-3.641 3.428C3 6.449 3 7.684 3 10.154v2.122c0 2.558 0 3.838.706 4.726q.306.383.713.671c.76.536 1.79.64 3.581.66"/>
-    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M3 10a2.78 2.78 0 0 1 2.778-2.778c.555 0 1.209.097 1.748-.047.48-.129.854-.503.982-.982.145-.54.048-1.194.048-1.749a2.78 2.78 0 0 1 2.777-2.777"/>
-  </symbol>
-  <symbol id="github-icon" viewBox="0 0 19 19">
-    <path fill="#08060d" fill-rule="evenodd" d="M9.356 1.85C5.05 1.85 1.57 5.356 1.57 9.694a7.84 7.84 0 0 0 5.324 7.44c.387.079.528-.168.528-.376 0-.182-.013-.805-.013-1.454-2.165.467-2.616-.935-2.616-.935-.349-.91-.864-1.143-.864-1.143-.71-.48.051-.48.051-.48.787.051 1.2.805 1.2.805.695 1.194 1.817.857 2.268.649.064-.507.27-.857.49-1.052-1.728-.182-3.545-.857-3.545-3.87 0-.857.31-1.558.8-2.104-.078-.195-.349-1 .077-2.078 0 0 .657-.208 2.14.805a7.5 7.5 0 0 1 1.946-.26c.657 0 1.328.092 1.946.26 1.483-1.013 2.14-.805 2.14-.805.426 1.078.155 1.883.078 2.078.502.546.799 1.247.799 2.104 0 3.013-1.818 3.675-3.558 3.87.284.247.528.714.528 1.454 0 1.052-.012 1.896-.012 2.156 0 .208.142.455.528.377a7.84 7.84 0 0 0 5.324-7.441c.013-4.338-3.48-7.844-7.773-7.844" clip-rule="evenodd"/>
-  </symbol>
-  <symbol id="social-icon" viewBox="0 0 20 20">
-    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M12.5 6.667a4.167 4.167 0 1 0-8.334 0 4.167 4.167 0 0 0 8.334 0"/>
-    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M2.5 16.667a5.833 5.833 0 0 1 8.75-5.053m3.837.474.513 1.035c.07.144.257.282.414.309l.93.155c.596.1.736.536.307.965l-.723.73a.64.64 0 0 0-.152.531l.207.903c.164.715-.213.991-.84.618l-.872-.52a.63.63 0 0 0-.577 0l-.872.52c-.624.373-1.003.094-.84-.618l.207-.903a.64.64 0 0 0-.152-.532l-.723-.729c-.426-.43-.289-.864.306-.964l.93-.156a.64.64 0 0 0 .412-.31l.513-1.034c.28-.562.735-.562 1.012 0"/>
-  </symbol>
-  <symbol id="x-icon" viewBox="0 0 19 19">
-    <path fill="#08060d" fill-rule="evenodd" d="M1.893 1.98c.052.072 1.245 1.769 2.653 3.77l2.892 4.114c.183.261.333.48.333.486s-.068.089-.152.183l-.522.593-.765.867-3.597 4.087c-.375.426-.734.834-.798.905a1 1 0 0 0-.118.148c0 .01.236.017.664.017h.663l.729-.83c.4-.457.796-.906.879-.999a692 692 0 0 0 1.794-2.038c.034-.037.301-.34.594-.675l.551-.624.345-.392a7 7 0 0 1 .34-.374c.006 0 .93 1.306 2.052 2.903l2.084 2.965.045.063h2.275c1.87 0 2.273-.003 2.266-.021-.008-.02-1.098-1.572-3.894-5.547-2.013-2.862-2.28-3.246-2.273-3.266.008-.019.282-.332 2.085-2.38l2-2.274 1.567-1.782c.022-.028-.016-.03-.65-.03h-.674l-.3.342a871 871 0 0 1-1.782 2.025c-.067.075-.405.458-.75.852a100 100 0 0 1-.803.91c-.148.172-.299.344-.99 1.127-.304.343-.32.358-.345.327-.015-.019-.904-1.282-1.976-2.808L6.365 1.85H1.8zm1.782.91 8.078 11.294c.772 1.08 1.413 1.973 1.425 1.984.016.017.241.02 1.05.017l1.03-.004-2.694-3.766L7.796 5.75 5.722 2.852l-1.039-.004-1.039-.004z" clip-rule="evenodd"/>
-  </symbol>
-</svg>
+import { useEffect, useState } from 'react';
+
+const API = import.meta.env.VITE_API_URL || 'http://localhost:8001';
+const initial = { answer: '', needs_review: false, sources: [] };
+const T = {
+  page: { minHeight: '100vh', background: '#f6f4f0', color: '#272d33', fontFamily: 'Inter, system-ui, sans-serif', padding: '28px 18px 80px' },
+  wrap: { maxWidth: 1080, margin: '0 auto' },
+  header: { display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 14, alignItems: 'center', marginBottom: 22 },
+  title: { fontSize: 'clamp(24px, 3vw, 34px)', letterSpacing: '-.035em', margin: '8px 0 4px', fontWeight: 730 },
+  muted: { color: '#667078', fontSize: 13, lineHeight: 1.6 },
+  eyebrow: { fontSize: 11, letterSpacing: '.14em', color: '#51776e', textTransform: 'uppercase', fontWeight: 800 },
+  grid: { display: 'grid', gridTemplateColumns: 'minmax(270px, 365px) minmax(0, 1fr)', gap: 18, alignItems: 'start' },
+  card: { borderRadius: 16, background: '#fff', padding: 22, boxShadow: '0 3px 18px #1f29370b', border: '1px solid #e6e9e6', marginBottom: 16 },
+  label: { fontSize: 12, fontWeight: 700, margin: '14px 0 6px', display: 'block' },
+  field: { width: '100%', padding: '11px 12px', fontSize: 14, border: '1px solid #d5ddd9', borderRadius: 9, color: '#273238', background: '#fff', boxSizing: 'border-box' },
+  btn: { border: 'none', borderRadius: 9, padding: '11px 15px', background: '#547c70', color: '#fff', fontWeight: 700, cursor: 'pointer' },
+  outline: { border: '1px solid #d5ddd9', borderRadius: 9, padding: '8px 10px', background: '#fff', color: '#33424b', cursor: 'pointer' },
+  pill: { fontSize: 11, background: '#eaf4ee', borderRadius: 12, color: '#356554', padding: '4px 8px', fontWeight: 700 },
+  divider: { borderTop: '1px solid #e9ecea', paddingTop: 13, marginTop: 16 },
+};
+
+export default function App() {
+  const [docs, setDocs] = useState([]);
+  const [title, setTitle] = useState('');
+  const [kind, setKind] = useState('policy');
+  const [text, setText] = useState('');
+  const [file, setFile] = useState(null);
+  const [selected, setSelected] = useState([]);
+  const [question, setQuestion] = useState('');
+  const [answer, setAnswer] = useState(null);
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState('');
+
+  async function request(path, options) {
+    const res = await fetch(`${API}${path}`, options);
+    const data = await res.json();
+    if (!res.ok) throw new Error(typeof data.detail === 'string' ? data.detail : `Request failed (${res.status})`);
+    return data;
+  }
+  async function loadDocs() {
+    try {
+      const data = await request('/documents');
+      setDocs(data.documents);
+      setSelected(prev => prev.filter(id => data.documents.some(d => d.id === id)));
+    } catch (e) { setMessage(`Could not connect to backend: ${e.message}`); }
+  }
+  useEffect(() => { loadDocs(); }, []);
+
+  async function upload(e) {
+    e.preventDefault(); setBusy(true); setMessage('');
+    try {
+      let result;
+      if (file) {
+        const fd = new FormData(); fd.append('file', file); fd.append('kind', kind);
+        result = await request('/documents/upload', { method: 'POST', body: fd });
+      } else {
+        result = await request('/documents/text', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title, kind, text }) });
+      }
+      setMessage(result.duplicate ? 'This document is already indexed.' : `Indexed ${result.chunks} chunks. Ready for questions.`);
+      setFile(null); setText(''); setTitle('');
+      const picker = document.getElementById('docfile'); if (picker) picker.value = '';
+      await loadDocs();
+    } catch (e) { setMessage(e.message); }
+    finally { setBusy(false); }
+  }
+  async function removeDoc(id) {
+    if (!window.confirm('Remove this document and its indexed passages?')) return;
+    setBusy(true); setMessage('');
+    try { await request(`/documents/${id}`, { method: 'DELETE' }); await loadDocs(); setMessage('Document removed.'); }
+    catch (e) { setMessage(e.message); }
+    finally { setBusy(false); }
+  }
+  async function ask(e) {
+    e.preventDefault(); setBusy(true); setAnswer(null); setMessage('');
+    try {
+      setAnswer(await request('/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question, document_ids: selected.length ? selected : null }) }));
+    } catch (e) { setMessage(e.message); }
+    finally { setBusy(false); }
+  }
+  function toggle(id) { setSelected(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]); }
+
+  return (
+    <main style={T.page}><div style={T.wrap}>
+      <header style={T.header}>
+        <div><span style={T.eyebrow}>Document intelligence / RAG</span>
+          <h1 style={T.title}>Contracts & Policies, explained.</h1>
+          <p style={{ ...T.muted, margin: '4px 0 0' }}>Persistent search, grounded answers, and verifiable document citations.</p>
+        </div>
+        <span style={{ ...T.pill, padding: '9px 12px' }}>LangChain · Chroma · SQLite · Gemini</span>
+      </header>
+      {message && <div role="alert" style={{ ...T.card, background: '#f6eeda', color: '#6b541a' }}>{message}</div>}
+      <div className="docqa-grid" style={T.grid}>
+        <aside>
+          <section style={T.card}>
+            <div style={T.eyebrow}>01 / Knowledge library</div>
+            <h2 style={{ fontSize: 18, margin: '7px 0 4px' }}>Add a document</h2>
+            <p style={T.muted}>Upload a text-based PDF or TXT, or paste policy text.</p>
+            <form onSubmit={upload}>
+              <label style={T.label}>Document type</label>
+              <select style={T.field} value={kind} onChange={e => setKind(e.target.value)}>
+                <option value="policy">Company policy</option><option value="contract">Vendor contract</option><option value="other">Other document</option>
+              </select>
+              <label style={T.label}>Choose a file (PDF or TXT)</label>
+              <input id="docfile" aria-label="Upload document" style={{ ...T.field, padding: 9 }} type="file" accept=".pdf,.txt"
+                     onChange={e => setFile(e.target.files?.[0] || null)} />
+              <label style={T.label}>Or paste document text</label>
+              <input style={{ ...T.field, marginBottom: 8 }} value={title} onChange={e => setTitle(e.target.value)} placeholder="e.g. Travel Policy" disabled={!!file} />
+              <textarea style={{ ...T.field, height: 100, resize: 'vertical' }} value={text} onChange={e => setText(e.target.value)}
+                        placeholder="Paste the policy or contract text here" disabled={!!file} />
+              <button style={{ ...T.btn, marginTop: 12, width: '100%', opacity: busy ? .6 : 1 }} disabled={busy || (!file && (!title.trim() || !text.trim()))}>
+                {busy ? 'Working…' : 'Index document'}
+              </button>
+            </form>
+          </section>
+          <section style={T.card}>
+            <div style={T.eyebrow}>Indexed documents</div>
+            <p style={T.muted}>{docs.length} current documents. Select a subset, or leave all unchecked to search everything current.</p>
+            {docs.length === 0 && <p style={T.muted}>Nothing indexed yet.</p>}
+            {docs.map(d => <div key={d.id} style={{ ...T.divider, display: 'flex', gap: 8, alignItems: 'center' }}>
+              <input aria-label={`Select ${d.title}`} type="checkbox" checked={selected.includes(d.id)} onChange={() => toggle(d.id)} />
+              <div style={{ flex: 1, minWidth: 0 }}><div style={{ overflowWrap: 'anywhere', fontWeight: 650, fontSize: 13 }}>{d.title}</div>
+                <div style={{ ...T.muted, fontSize: 11 }}>{d.kind} · v{d.version}</div></div>
+              <button aria-label={`Remove ${d.title}`} style={{ ...T.outline, padding: '5px 8px' }} onClick={() => removeDoc(d.id)} disabled={busy}>×</button>
+            </div>)}
+          </section>
+        </aside>
+        <section>
+          <div style={T.card}>
+            <div style={T.eyebrow}>02 / Ask your documents</div>
+            <h2 style={{ fontSize: 20, margin: '8px 0 5px' }}>Ask a grounded question</h2>
+            <p style={T.muted}>Try “What is the travel approval threshold?” or “What is the vendor cancellation notice period?”</p>
+            <form onSubmit={ask}>
+              <textarea value={question} onChange={e => setQuestion(e.target.value)}
+                        placeholder="Ask a question about your indexed contracts and policies…"
+                        style={{ ...T.field, minHeight: 110, marginTop: 14, resize: 'vertical' }} />
+              <button style={{ ...T.btn, marginTop: 12, opacity: busy ? .6 : 1 }} disabled={busy || !docs.length || !question.trim()}>
+                {busy ? 'Searching…' : 'Search & answer'}
+              </button>
+            </form>
+          </div>
+          {answer && <div style={T.card}>
+            <div style={{ display: 'flex', gap: 8, justifyContent: 'space-between', alignItems: 'center' }}>
+              <h2 style={{ fontSize: 18, margin: '0 0 10px' }}>Answer</h2>
+              {answer.needs_review && <span style={{ ...T.pill, background: '#fff3db', color: '#8d621a' }}>Review needed</span>}
+            </div>
+            <p style={{ whiteSpace: 'pre-wrap', lineHeight: 1.7, fontSize: 15 }}>{answer.answer}</p>
+            <h3 style={{ fontSize: 13, marginTop: 24 }}>Verified source IDs</h3>
+            <p style={T.muted}>Source IDs are checked against retrieved passages. Their factual support still requires review.</p>
+            {(answer.sources || []).map(s => <article key={s.id} style={{ ...T.divider }}>
+              <div style={{ fontSize: 13, fontWeight: 750 }}>{s.id} · {s.title} · page {s.page}</div>
+              <p style={{ ...T.muted, whiteSpace: 'pre-wrap', margin: '7px 0' }}>{s.excerpt}</p>
+            </article>)}
+            {answer.sources?.length === 0 && <p style={T.muted}>No reliable citations returned.</p>}
+          </div>}
+          <div style={{ ...T.card, background: '#f0f1ed' }}>
+            <div style={T.eyebrow}>Research prototype</div>
+            <p style={{ ...T.muted, marginBottom: 0 }}>This local single-user demo is not legal advice. Documents are sent to Gemini for embeddings and answers. Avoid confidential material unless you have appropriate authorization.</p>
+          </div>
+        </section>
+      </div>
+    </div></main>
+  );
+}
